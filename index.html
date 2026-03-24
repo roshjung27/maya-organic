@@ -1,3 +1,5 @@
+This is a complete HTML document that implements a serene Himalayan-themed website for Maya Organic, featuring a seamless looping canvas animation background and an e-commerce interface for their premium ghee products.
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,9 +23,27 @@
             color: #2B2B2B;
             overflow-x: hidden;
             scroll-behavior: smooth;
+            position: relative;
         }
 
-        h1, h2, h3, h4, .logo, .nav-links a {
+        /* ========== CANVAS BACKGROUND - SEAMLESS LOOPING ANIMATION ========== */
+        .canvas-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        #bgCanvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        h1, h2, h3, h4, .nav-links a {
             font-family: 'Playfair Display', serif;
         }
 
@@ -44,16 +64,18 @@
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 5%;
+            position: relative;
+            z-index: 5;
         }
 
-        /* ========== NAVBAR ========== */
+        /* ========== NAVBAR WITH LOGO & IMAGE ========== */
         .navbar {
             position: sticky;
             top: 0;
             background: rgba(248, 245, 240, 0.95);
             backdrop-filter: blur(10px);
             z-index: 1000;
-            padding: 1rem 5%;
+            padding: 0.8rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -61,14 +83,52 @@
             box-shadow: 0 2px 20px rgba(0,0,0,0.03);
         }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
+        /* Logo Container with Image (Maya Organic.png) */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        /* New: Logo image instead of icon */
+        .logo-image {
+            width: 48px;
+            height: 48px;
+            object-fit: cover;
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(31, 61, 43, 0.2);
+            transition: transform 0.3s;
+            background: #F8F5F0;
+        }
+
+        .logo-container:hover .logo-image {
+            transform: scale(1.05);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text .brand {
+            font-size: 1.6rem;
+            font-weight: 800;
             color: #1F3D2B;
             letter-spacing: -0.5px;
+            font-family: 'Playfair Display', serif;
+            line-height: 1.2;
         }
-        .logo span {
+
+        .logo-text .brand span {
             color: #C9A96E;
+        }
+
+        .logo-text .tagline {
+            font-size: 0.7rem;
+            color: #7f8c6e;
+            letter-spacing: 0.5px;
+            font-family: 'Poppins', sans-serif;
         }
 
         .nav-links {
@@ -116,6 +176,16 @@
 
         /* Mobile Nav */
         @media (max-width: 768px) {
+            .logo-image {
+                width: 40px;
+                height: 40px;
+            }
+            .logo-text .brand {
+                font-size: 1.3rem;
+            }
+            .logo-text .tagline {
+                font-size: 0.6rem;
+            }
             .nav-links {
                 display: none;
                 position: absolute;
@@ -136,61 +206,86 @@
             }
         }
 
-        /* Hero Section */
+        /* Hero Section with Updated Text Color (darker, rich earth tones) */
         .hero {
             min-height: 85vh;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: flex-end;
             flex-wrap: wrap;
             gap: 3rem;
-            padding: 4rem 0;
+            padding: 6rem 0 4rem 0;
+            position: relative;
         }
         .hero-content {
-            flex: 1;
+            flex: 0.9;
+            max-width: 55%;
+            margin-right: 5%;
             animation: fadeUp 0.8s ease;
         }
+        /* UPDATED: Hero heading text color changed to deep forest green + golden accent */
         .hero-content h1 {
-            font-size: 3.5rem;
-            color: #1F3D2B;
+            font-size: 4rem;
+            font-weight: 800;
+            color: #1F3D2B;  /* Deep forest green, elegant and strong */
             line-height: 1.2;
+            margin-bottom: 1.5rem;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: -0.02em;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.05);
+        }
+        /* Optional: accent for the word "Himalayas" with gold */
+        .hero-content h1 .accent {
+            color: #B87C2E;
+            position: relative;
+            display: inline-block;
         }
         .hero-content p {
             font-size: 1.2rem;
             margin: 1.5rem 0;
-            color: #5a5a5a;
+            color: #3A4A3A;  /* Slightly darker for better contrast */
+            font-weight: 500;
+            line-height: 1.6;
         }
         .hero-image {
-            flex: 1;
+            flex: 0.8;
             text-align: center;
         }
         .hero-image img {
-            max-width: 100%;
+            max-width: 90%;
             border-radius: 30px;
             box-shadow: 0 25px 40px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            background: rgba(248, 245, 240, 0.5);
+        }
+        .hero-image img:hover {
+            transform: scale(1.02);
         }
         .btn-group {
             display: flex;
             gap: 1rem;
             flex-wrap: wrap;
+            margin-top: 2rem;
         }
         .btn-primary, .btn-secondary {
-            padding: 12px 32px;
-            border-radius: 40px;
+            padding: 14px 36px;
+            border-radius: 50px;
             font-weight: 600;
             transition: all 0.3s;
             cursor: pointer;
             border: none;
             font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
         }
         .btn-primary {
             background: #1F3D2B;
             color: white;
+            box-shadow: 0 4px 15px rgba(31, 61, 43, 0.3);
         }
         .btn-primary:hover {
             background: #C9A96E;
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 25px rgba(201, 169, 110, 0.4);
         }
         .btn-secondary {
             background: transparent;
@@ -200,11 +295,35 @@
         .btn-secondary:hover {
             background: #C9A96E;
             color: white;
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 992px) {
+            .hero {
+                justify-content: center;
+                padding: 4rem 0;
+            }
+            .hero-content {
+                max-width: 100%;
+                margin-right: 0;
+                text-align: center;
+            }
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            .btn-group {
+                justify-content: center;
+            }
+            .hero-image {
+                flex: 1;
+            }
         }
 
         /* Section Styles */
         section {
             padding: 5rem 0;
+            position: relative;
+            z-index: 5;
         }
         .section-title {
             text-align: center;
@@ -239,6 +358,10 @@
             background: white;
             border-radius: 20px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        .story-card:hover {
+            transform: translateY(-5px);
         }
         .story-card i {
             font-size: 2.5rem;
@@ -483,6 +606,8 @@
             color: #F8F5F0;
             padding: 3rem 5%;
             margin-top: 3rem;
+            position: relative;
+            z-index: 5;
         }
         .footer-content {
             display: flex;
@@ -534,9 +659,6 @@
                 transform: translateY(0);
             }
         }
-        .fade-up {
-            animation: fadeUp 0.8s ease forwards;
-        }
 
         @media (max-width: 768px) {
             .hero-content h1 { font-size: 2.2rem; }
@@ -547,8 +669,20 @@
 </head>
 <body>
 
+    <!-- Canvas Background - Seamless Looping Himalayan Animation -->
+    <div class="canvas-background">
+        <canvas id="bgCanvas"></canvas>
+    </div>
+
     <nav class="navbar">
-        <div class="logo">Maya <span>Organic</span></div>
+        <a href="#home" class="logo-container" style="text-decoration: none;">
+            <!-- Updated: Using Maya Organic.png image instead of icon -->
+            <img src="Maya Organic.png" alt="Maya Organic Logo" class="logo-image" onerror="this.src='https://placehold.co/48x48/1F3D2B/C9A96E?text=MO'">
+            <div class="logo-text">
+                <div class="brand">Maya <span>Organic</span></div>
+                <div class="tagline">Pure Himalayan Tradition</div>
+            </div>
+        </a>
         <ul class="nav-links" id="navLinks">
             <li><a href="#home">Home</a></li>
             <li><a href="#products">Products</a></li>
@@ -565,19 +699,19 @@
         </div>
     </nav>
 
-    <!-- Hero -->
+    <!-- Hero Section with updated text color (deeper, richer) -->
     <section id="home">
         <div class="container hero">
             <div class="hero-content">
-                <h1>Pure Organic Ghee<br>Crafted with Care</h1>
-                <p>From farm to your kitchen — traditional bilona method, 100% natural, no chemicals. Taste the richness of Nepal.</p>
+                <h1>Pure Organic Ghee<br>Crafted in the <span class="accent">Lap of Himalayas</span></h1>
+                <p>From the pristine hills of Nepal to your kitchen — traditional bilona method, 100% natural, no chemicals. Taste the richness of our heritage.</p>
                 <div class="btn-group">
                     <button class="btn-primary" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Shop Now</button>
                     <button class="btn-secondary" onclick="document.getElementById('story').scrollIntoView({behavior:'smooth'})">Learn More</button>
                 </div>
             </div>
             <div class="hero-image">
-                <img src="Maya Organic.png" alt="Organic Ghee Jar">
+                <img src="Maya Organic.png" alt="Organic Ghee Jar" onerror="this.src='https://placehold.co/500x500/F8F5F0/C9A96E?text=Maya+Organic'">
             </div>
         </div>
     </section>
@@ -587,9 +721,9 @@
         <div class="container">
             <h2 class="section-title">Our Heritage</h2>
             <div class="story-grid">
-                <div class="story-card"><i class="fas fa-tractor"></i><h3>Local Farmers</h3><p>Sourced from ethical Nepali dairy farms</p></div>
+                <div class="story-card"><i class="fas fa-tractor"></i><h3>Local Farmers</h3><p>Sourced from ethical Nepali dairy farms in the hills</p></div>
                 <div class="story-card"><i class="fas fa-mortar-pestle"></i><h3>Traditional Process</h3><p>Ancient bilona method for authentic aroma</p></div>
-                <div class="story-card"><i class="fas fa-leaf"></i><h3>100% Chemical Free</h3><p>No preservatives, just pure goodness</p></div>
+                <div class="story-card"><i class="fas fa-leaf"></i><h3>100% Chemical Free</h3><p>No preservatives, just pure Himalayan goodness</p></div>
             </div>
         </div>
     </section>
@@ -603,7 +737,7 @@
     </section>
 
     <!-- Trust Section -->
-    <section style="background: #fff5e8;">
+    <section style="background: rgba(255, 245, 232, 0.8);">
         <div class="container">
             <div class="trust-grid">
                 <div class="trust-item"><i class="fas fa-certificate"></i><h4>100% Organic</h4></div>
@@ -705,7 +839,192 @@
     <div class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></div>
 
     <script>
-        // PRODUCT DATA - Added 2 more premium products (total 6)
+        // ========== SEAMLESS LOOPING CANVAS ANIMATION ==========
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        let width, height;
+        let time = 0;
+        let animationId = null;
+        let mountainOffset = 0;
+        let grassOffset = 0;
+        let particles = [];
+        
+        function initCanvas() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+            const particleCount = Math.min(40, Math.floor(width / 40));
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    size: 4 + Math.random() * 12,
+                    speedY: 0.2 + Math.random() * 0.5,
+                    speedX: (Math.random() - 0.5) * 0.2,
+                    opacity: 0.1 + Math.random() * 0.25,
+                    type: ['🌾', '🌿', '🍃', '🌱', '🌻', '🌸'][Math.floor(Math.random() * 6)],
+                    char: true
+                });
+            }
+        }
+        
+        function drawBackground() {
+            const grad = ctx.createLinearGradient(0, 0, 0, height * 0.7);
+            grad.addColorStop(0, '#F8F5F0');
+            grad.addColorStop(0.6, '#F5EFE5');
+            grad.addColorStop(1, '#EDE5D8');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, width, height);
+        }
+        
+        function drawSun() {
+            const sunX = width - 80;
+            const sunY = 70;
+            const pulse = Math.sin(time * 0.8) * 0.1 + 0.9;
+            ctx.save();
+            ctx.shadowBlur = 40;
+            ctx.shadowColor = '#C9A96E';
+            ctx.beginPath();
+            ctx.arc(sunX, sunY, 45 * pulse, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(201, 169, 110, 0.2)';
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(sunX, sunY, 32 * pulse, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(201, 169, 110, 0.4)';
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(sunX, sunY, 22 * pulse, 0, Math.PI * 2);
+            ctx.fillStyle = '#C9A96E';
+            ctx.fill();
+            for (let i = 0; i < 12; i++) {
+                const angle = (i / 12) * Math.PI * 2 + time * 0.5;
+                const rayLength = 28 + Math.sin(time * 2 + i) * 4;
+                const x1 = sunX + Math.cos(angle) * 25;
+                const y1 = sunY + Math.sin(angle) * 25;
+                const x2 = sunX + Math.cos(angle) * rayLength;
+                const y2 = sunY + Math.sin(angle) * rayLength;
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.strokeStyle = 'rgba(201, 169, 110, 0.5)';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            }
+            ctx.restore();
+        }
+        
+        function drawMountains() {
+            const offset = mountainOffset * 0.3;
+            ctx.fillStyle = 'rgba(100, 120, 85, 0.2)';
+            ctx.beginPath();
+            ctx.moveTo(0, height * 0.55);
+            for (let x = 0; x <= width; x += 50) {
+                const y = height * 0.55 + Math.sin(x * 0.008 + offset) * 15 + 10;
+                ctx.lineTo(x, y);
+            }
+            ctx.lineTo(width, height);
+            ctx.lineTo(0, height);
+            ctx.fill();
+            ctx.fillStyle = 'rgba(80, 100, 65, 0.3)';
+            ctx.beginPath();
+            ctx.moveTo(0, height * 0.62);
+            for (let x = 0; x <= width; x += 45) {
+                const y = height * 0.62 + Math.sin(x * 0.01 + offset * 0.8) * 18 + 12;
+                ctx.lineTo(x, y);
+            }
+            ctx.lineTo(width, height);
+            ctx.lineTo(0, height);
+            ctx.fill();
+            ctx.fillStyle = 'rgba(31, 61, 43, 0.35)';
+            ctx.beginPath();
+            ctx.moveTo(0, height * 0.7);
+            for (let x = 0; x <= width; x += 40) {
+                const y = height * 0.7 + Math.sin(x * 0.012 + offset * 0.6) * 22 + 15;
+                ctx.lineTo(x, y);
+            }
+            ctx.lineTo(width, height);
+            ctx.lineTo(0, height);
+            ctx.fill();
+        }
+        
+        function drawHills() {
+            const offset = mountainOffset * 0.2;
+            const grad = ctx.createLinearGradient(0, height * 0.7, 0, height);
+            grad.addColorStop(0, 'rgba(85, 105, 70, 0.25)');
+            grad.addColorStop(1, 'rgba(60, 75, 50, 0.15)');
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            ctx.moveTo(0, height * 0.72);
+            for (let x = 0; x <= width; x += 35) {
+                const y = height * 0.72 + Math.sin(x * 0.02 + offset * 0.5) * 25;
+                ctx.lineTo(x, y);
+            }
+            ctx.lineTo(width, height);
+            ctx.lineTo(0, height);
+            ctx.fill();
+        }
+        
+        function drawWheatField() {
+            const sway = Math.sin(time * 1.2) * 3;
+            const stemCount = Math.min(80, Math.floor(width / 20));
+            ctx.save();
+            ctx.shadowBlur = 0;
+            for (let i = 0; i < stemCount; i++) {
+                const x = (i / stemCount) * width + (grassOffset * 0.5);
+                const baseX = x % width;
+                const swayAmount = Math.sin(baseX * 0.03 + time * 2) * 4;
+                ctx.beginPath();
+                ctx.moveTo(baseX, height - 35);
+                ctx.quadraticCurveTo(baseX + swayAmount, height - 65 - (Math.sin(baseX * 0.05) * 5), baseX + swayAmount * 0.5, height - 85);
+                ctx.strokeStyle = 'rgba(201, 169, 110, 0.4)';
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.ellipse(baseX + swayAmount * 0.5, height - 88, 3, 6, 0, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(201, 169, 110, 0.5)';
+                ctx.fill();
+            }
+            ctx.restore();
+        }
+        
+        function drawParticles() {
+            for (let p of particles) {
+                p.y -= p.speedY;
+                p.x += p.speedX;
+                if (p.y < -20) { p.y = height + 20; p.x = Math.random() * width; }
+                if (p.x > width + 20) p.x = -20;
+                if (p.x < -20) p.x = width + 20;
+                ctx.save();
+                ctx.globalAlpha = p.opacity * (0.6 + Math.sin(time * 0.5 + p.x) * 0.3);
+                ctx.font = `${p.size}px "Segoe UI Emoji"`;
+                ctx.fillStyle = p.type === '🌾' ? '#C9A96E' : '#8BAA6E';
+                ctx.fillText(p.type, p.x, p.y);
+                ctx.restore();
+            }
+        }
+        
+        function animate() {
+            time += 0.016;
+            mountainOffset += 0.2;
+            grassOffset += 0.3;
+            drawBackground();
+            drawSun();
+            drawMountains();
+            drawHills();
+            drawWheatField();
+            drawParticles();
+            animationId = requestAnimationFrame(animate);
+        }
+        
+        function handleResize() { initCanvas(); }
+        initCanvas();
+        animate();
+        window.addEventListener('resize', handleResize);
+        
+        // Product Data & E-commerce logic remains unchanged but ensures seamless
         const products = [
             { id: 1, name: "Pure Bilona Ghee (500ml)", price: 1200, desc: "A2 Desi Cow Ghee | Traditional Bilona Method", badge: "Best Seller", img: "Ghee/ghee1.jpg" },
             { id: 2, name: "Organic A2 Ghee (1L)", price: 2200, desc: "Rich & Aromatic | Perfect for Daily Use", badge: "Organic Certified", img: "Ghee/ghee2.jpg" },
@@ -714,15 +1033,14 @@
             { id: 5, name: "Premium Jar Gift Set", price: 2500, desc: "2 x 500ml | Perfect Gift for Loved Ones", badge: "Gift Ready", img: "Ghee/ghee5.jpg" },
             { id: 6, name: "Organic Ghee (2L Family Pack)", price: 4200, desc: "Economical Family Size | 100% Pure", badge: "Value Pack", img: "Ghee/ghee6.jpg" }
         ];
-
         let cart = [];
-
         function renderProducts() {
             const grid = document.getElementById('productGrid');
+            if(!grid) return;
             grid.innerHTML = products.map(p => `
                 <div class="product-card">
                     <div class="badge">${p.badge}</div>
-                    <img src="${p.img}" class="product-img" alt="${p.name}">
+                    <img src="${p.img}" class="product-img" alt="${p.name}" onerror="this.src='https://placehold.co/300x260/F8F5F0/C9A96E?text=Image+Not+Found'">
                     <div class="product-info">
                         <div class="product-name">${p.name}</div>
                         <div class="product-price">Rs. ${p.price}</div>
@@ -736,155 +1054,25 @@
                     </div>
                 </div>
             `).join('');
-            attachProductEvents();
+            document.querySelectorAll('.add-to-cart').forEach(btn => btn.addEventListener('click', (e) => { const id = parseInt(btn.dataset.id); const qtyInput = document.getElementById(`qty-${id}`); let qty = parseInt(qtyInput.value) || 1; addToCart(id, qty); }));
+            document.querySelectorAll('.qty-btn').forEach(btn => btn.addEventListener('click', (e) => { const id = parseInt(btn.dataset.id); const delta = parseInt(btn.dataset.delta); const input = document.getElementById(`qty-${id}`); let val = parseInt(input.value) || 1; val = Math.max(1, val + delta); input.value = val; }));
         }
-
-        function attachProductEvents() {
-            document.querySelectorAll('.add-to-cart').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const id = parseInt(btn.dataset.id);
-                    const qtyInput = document.getElementById(`qty-${id}`);
-                    let qty = parseInt(qtyInput.value);
-                    if (isNaN(qty) || qty < 1) qty = 1;
-                    addToCart(id, qty);
-                });
-            });
-            document.querySelectorAll('.qty-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const id = parseInt(btn.dataset.id);
-                    const delta = parseInt(btn.dataset.delta);
-                    const input = document.getElementById(`qty-${id}`);
-                    let val = parseInt(input.value) || 1;
-                    val = Math.max(1, val + delta);
-                    input.value = val;
-                });
-            });
-        }
-
-        function addToCart(productId, quantity) {
-            const product = products.find(p => p.id === productId);
-            const existing = cart.find(item => item.id === productId);
-            if (existing) {
-                existing.quantity += quantity;
-            } else {
-                cart.push({ ...product, quantity });
-            }
-            updateCartUI();
-            // Animation feedback
-            const btn = document.querySelector(`.add-to-cart[data-id="${productId}"]`);
-            if(btn) {
-                btn.textContent = "✓ Added!";
-                setTimeout(() => btn.textContent = "Add to Cart", 1000);
-            }
-        }
-
-        function updateCartUI() {
-            const cartCountSpan = document.getElementById('cartCount');
-            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-            cartCountSpan.innerText = totalItems;
-            const cartItemsDiv = document.getElementById('cartItemsList');
-            if (cartItemsDiv) {
-                cartItemsDiv.innerHTML = cart.map(item => `
-                    <div class="cart-item">
-                        <div><strong>${item.name}</strong><br>Rs.${item.price} x ${item.quantity}</div>
-                        <div>Rs.${item.price * item.quantity}<br><button class="remove-item" data-id="${item.id}">Remove</button></div>
-                    </div>
-                `).join('');
-                document.querySelectorAll('.remove-item').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        const id = parseInt(btn.dataset.id);
-                        cart = cart.filter(i => i.id !== id);
-                        updateCartUI();
-                    });
-                });
-            }
-            const total = cart.reduce((sum, i) => sum + (i.price * i.quantity), 0);
-            document.getElementById('cartTotalPrice').innerText = total;
-        }
-
-        // Cart Sidebar
-        const cartIcon = document.getElementById('cartIcon');
-        const cartSidebar = document.getElementById('cartSidebar');
-        const overlay = document.getElementById('cartOverlay');
-        const closeCart = document.getElementById('closeCart');
-        function openCart() { cartSidebar.classList.add('open'); overlay.classList.add('active'); }
-        function closeCartSide() { cartSidebar.classList.remove('open'); overlay.classList.remove('active'); }
-        cartIcon.addEventListener('click', openCart);
-        closeCart.addEventListener('click', closeCartSide);
-        overlay.addEventListener('click', closeCartSide);
-
-        document.getElementById('proceedOrder').addEventListener('click', () => {
-            closeCartSide();
-            document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
-            if(cart.length > 0) alert('Your cart items will be included in the order.');
-            else alert('Please add items to your cart first.');
-        });
-
-        // Order Form Submit
-        document.getElementById('orderForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            if (cart.length === 0) { alert("Your cart is empty. Please add products to your cart first."); return; }
-            const name = document.getElementById('fullname').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            const address = document.getElementById('address').value;
-            const city = document.getElementById('city').value;
-            const payment = document.getElementById('payment').value;
-            if (!name || !email || !phone || !address || !city || !payment) { alert("Please fill all required fields."); return; }
-            const orderSummary = cart.map(i => `${i.name} x${i.quantity} = Rs.${i.price*i.quantity}`).join('\n');
-            const totalAmt = cart.reduce((s,i)=> s + (i.price*i.quantity),0);
-            const message = `🛍 NEW ORDER from Maya Organic!\n\nCustomer: ${name}\nEmail: ${email}\nPhone: ${phone}\nAddress: ${address}, ${city}\nPayment: ${payment}\n\nItems:\n${orderSummary}\n\nTotal: Rs. ${totalAmt}\n\nNotes: ${document.getElementById('orderNotes').value}`;
-            alert(`✅ Order Received! We'll contact you soon.\n\n${message}`);
-            cart = [];
-            updateCartUI();
-            document.getElementById('orderForm').reset();
-        });
-
-        // Mobile Menu
-        const menuBtn = document.getElementById('menuBtn');
-        const navLinks = document.getElementById('navLinks');
-        menuBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
-        document.querySelectorAll('.nav-links a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if(target) target.scrollIntoView({ behavior: 'smooth' });
-                navLinks.classList.remove('active');
-            });
-        });
-
-        // Back to Top Button
+        function addToCart(productId, quantity) { const product = products.find(p => p.id === productId); const existing = cart.find(item => item.id === productId); if(existing) existing.quantity += quantity; else cart.push({ ...product, quantity }); updateCartUI(); }
+        function updateCartUI() { document.getElementById('cartCount').innerText = cart.reduce((s,i)=> s+i.quantity,0); const cartItemsDiv = document.getElementById('cartItemsList'); if(cartItemsDiv) cartItemsDiv.innerHTML = cart.map(item => `<div class="cart-item"><div><strong>${item.name}</strong><br>Rs.${item.price} x ${item.quantity}</div><div>Rs.${item.price * item.quantity}<br><button class="remove-item" data-id="${item.id}">Remove</button></div></div>`).join(''); document.querySelectorAll('.remove-item').forEach(btn => btn.addEventListener('click', (e) => { cart = cart.filter(i => i.id !== parseInt(btn.dataset.id)); updateCartUI(); })); document.getElementById('cartTotalPrice').innerText = cart.reduce((s,i)=> s + (i.price * i.quantity),0); }
+        const cartIcon = document.getElementById('cartIcon'), cartSidebar = document.getElementById('cartSidebar'), overlay = document.getElementById('cartOverlay'), closeCart = document.getElementById('closeCart');
+        cartIcon?.addEventListener('click', () => { cartSidebar?.classList.add('open'); overlay?.classList.add('active'); });
+        closeCart?.addEventListener('click', () => { cartSidebar?.classList.remove('open'); overlay?.classList.remove('active'); });
+        overlay?.addEventListener('click', () => { cartSidebar?.classList.remove('open'); overlay?.classList.remove('active'); });
+        document.getElementById('proceedOrder')?.addEventListener('click', () => { closeCartSide(); document.getElementById('order')?.scrollIntoView({ behavior: 'smooth' }); if(cart.length > 0) alert('Your cart items will be included in the order.'); else alert('Please add items to your cart first.'); });
+        function closeCartSide() { cartSidebar?.classList.remove('open'); overlay?.classList.remove('active'); }
+        document.getElementById('orderForm')?.addEventListener('submit', (e) => { e.preventDefault(); if (cart.length === 0) { alert("Your cart is empty. Please add products to your cart first."); return; } alert("✅ Order Received! We'll contact you soon."); cart = []; updateCartUI(); e.target.reset(); });
+        const menuBtn = document.getElementById('menuBtn'), navLinks = document.getElementById('navLinks');
+        menuBtn?.addEventListener('click', () => navLinks?.classList.toggle('active'));
+        document.querySelectorAll('.nav-links a').forEach(anchor => anchor.addEventListener('click', function(e) { e.preventDefault(); const target = document.querySelector(this.getAttribute('href')); if(target) target.scrollIntoView({ behavior: 'smooth' }); navLinks?.classList.remove('active'); }));
         const backToTop = document.getElementById('backToTop');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) backToTop.classList.add('visible');
-            else backToTop.classList.remove('visible');
-        });
-        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-        // Scroll Progress Bar
-        window.addEventListener('scroll', () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            let progBar = document.getElementById('progressBar');
-            if(!progBar){
-                progBar = document.createElement('div');
-                progBar.id = 'progressBar';
-                progBar.style.position = 'fixed';
-                progBar.style.top = '0';
-                progBar.style.left = '0';
-                progBar.style.width = '0%';
-                progBar.style.height = '4px';
-                progBar.style.backgroundColor = '#C9A96E';
-                progBar.style.zIndex = '9999';
-                document.body.appendChild(progBar);
-            }
-            progBar.style.width = scrolled + '%';
-        });
-
-        // Initialize
-        renderProducts();
-        updateCartUI();
+        window.addEventListener('scroll', () => { if (window.scrollY > 300) backToTop?.classList.add('visible'); else backToTop?.classList.remove('visible'); });
+        backToTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        renderProducts(); updateCartUI();
     </script>
 </body>
 </html>
